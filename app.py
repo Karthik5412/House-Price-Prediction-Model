@@ -26,7 +26,7 @@ with col4 :
     
 with col5 :
     house_type_list = ['Flat', 'Individual House']
-    house_type = st.radio('Enter House Type ', house_type_list)
+    type_of_building = st.radio('Enter House Type ', house_type_list)
     
 
 
