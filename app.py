@@ -37,3 +37,7 @@ bathroom = st.number_input('Enter number of bathrooms : ', 0, 10, 1)
 balcony = st.number_input('Enter number of balcony : ', 0, 10, 1)
 
 
+btn = st.button('Predict the price')
+
+if btn :
+    pass
