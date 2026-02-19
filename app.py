@@ -1,6 +1,10 @@
 import streamlit as st
 import joblib
 import pandas as pd
+import numpy as np
+
+np.set_printoptions(formatter={'float': '{: 0.6f}'.format})
+pd.set_option('display.float_format', lambda x: f'{x:.6f}')
 
 st.set_page_config(page_title='house price pediction', page_icon= '🏘️', layout= 'wide' )
 pipeline = joblib.load('pipeline.plk')
@@ -18,7 +22,7 @@ with col2 :
     region = st.selectbox('Enter Region : ', reg_list)
 
 
-area = st.slider('Enter area : ', 500, 2100, 750)
+area = st.slider('Enter area (sqft): ', 500, 2100, 750)
       
 col4, col5 = st.columns(2)
 with col4 :
@@ -40,4 +44,23 @@ balcony = st.number_input('Enter number of balcony : ', 0, 10, 1)
 btn = st.button('Predict the price')
 
 if btn :
-    pass
+    input_data = {
+        'Division' : [division],
+        'region' : [region],
+        'area' : [area],
+        'neworold' : [new_old],
+        'parking' : [parking],
+        'Bedrooms' : [bedroom],
+        'Bathrooms' : [bathroom],
+        'Balcony' : [balcony],
+        'Lift' : [lift],
+        'type_of_building' : [type_of_building]
+    }
+    
+    df = pd.DataFrame(input_data)
+    
+    predict = pipeline.predict(df)
+    pred = str(predict).replace('[', '')
+    pred = str(pred).replace(']', '')
+    
+    st.success(f'$ {round(float(pred), -3)}')
