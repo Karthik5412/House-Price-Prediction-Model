@@ -63,4 +63,4 @@ if btn :
     pred = str(predict).replace('[', '')
     pred = str(pred).replace(']', '')
     
-    st.success(f'$ {round(float(pred), -3)}')
+    st.success(f'₹ {round(float(pred), -3)}')
